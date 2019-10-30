@@ -22,4 +22,9 @@ Deleted some unnecessary comments and variables.
       - İf key is given as 1, the current joint values are changed with the values in the list.
   - CASE 1: For executing a movement using a pose goal.
     - The input should be of the form ``` x y z w ``` 
+ - To work with the script:
+  1. ``` roslaunch ur_gazebo ur5.launch ``` (gazebo)
+  2. ``` roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true ``` (moveit)
+  3. ``` roslaunch ur5_moveit_config moveit_rviz.launch config:=true ``` (rviz)
+  4. ``` python ur5_tryout.py ``` (python2)
  
