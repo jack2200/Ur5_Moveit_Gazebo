@@ -367,6 +367,14 @@ def main():
   while(1):
     try:
       print "============ Enter the number of the case 0..7"
+      print "0: Give states (joint state goal)"
+      print "1: Give coordinate (pose goal)"
+      print "2: Plan and display cartesian path"
+      print "3: Display a saved trajectory"
+      print "4: Execute saved path"
+      print "5: Add box"
+      print "6: Attach box"
+      print "7: Detach box"
       case = raw_input()
       if(case == "0"):
         print "============ Give states to execute a movement using a joint state goal ..."
