@@ -188,6 +188,12 @@ class MoveGroupPythonIntefaceTutorial(object):
     current_pose = self.group.get_current_pose().pose
     return all_close(pose_goal, current_pose, 0.01)
 
+  def go_to_shifted_pose(self, axis, value):
+    self.group.shift_pose_target(axis, value)
+    plan = self.group.go(wait=True)
+    self.group.stop()
+    self.group.clear_pose_targets()
+    return 
 
   def plan_cartesian_path(self, scale=1):
     ## BEGIN_SUB_TUTORIAL plan_cartesian_path
@@ -375,6 +381,7 @@ def main():
       print "5: Add box"
       print "6: Attach box"
       print "7: Detach box"
+      print "8: Shift pose"
       case = raw_input()
       if(case == "0"):
         print "============ Give states to execute a movement using a joint state goal ..."
@@ -422,6 +429,12 @@ def main():
         print "============ Press `Enter` to remove the box from the planning scene ..."
         raw_input()
         tutorial.remove_box()
+      elif(case == "8"):
+        inp = raw_input()
+        axis, value = inp.split(" ")
+        axis = int(axis)
+        value = float(value)
+        tutorial.go_to_shifted_pose(axis, value)
       else:
           print "Invalid case!!"
     except rospy.ROSInterruptException:
