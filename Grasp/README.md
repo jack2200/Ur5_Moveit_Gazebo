@@ -41,6 +41,7 @@ In python script `grasp_demo.py` (python2) , steps are implemented assuming the 
 
 Note: Variable names for robot and gripper move_groups or other things which should be renamed or changed are indicated in the code.
 
+Note 2: You should run the code as either `python grasp_demo.py 1` or `python grasp_demo.py 0` depending on the case if you want to print the info that shows steps are successful or not.
 
 
 
