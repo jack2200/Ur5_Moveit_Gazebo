@@ -27,4 +27,8 @@ Deleted some unnecessary comments and variables.
   2. ``` roslaunch ur5_moveit_config ur5_moveit_planning_execution.launch sim:=true ``` (moveit)
   3. ``` roslaunch ur5_moveit_config moveit_rviz.launch config:=true ``` (rviz)
   4. ``` python ur5_tryout.py ``` (python2)
+  
+  
+  
+  UPDATE: There are two new cases for movement! To see how they work please read the commit notes.
  
