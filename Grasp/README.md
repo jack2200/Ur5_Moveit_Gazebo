@@ -10,7 +10,7 @@ Python code that uses move_it to pick an object
 
  2. After executing the command below:
    
-       roslaunch <my_robot_moveit_configfile> <my_robot_exec.launch>
+       `roslaunch <my_robot_moveit_configfile> <my_robot_exec.launch>`
    
      if we get the message:
     > You can start planning_ now! [ INFO]
