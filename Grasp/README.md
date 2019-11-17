@@ -5,8 +5,8 @@ Python code that uses move_it to pick an object
 ## Some definitions
 
  1. ***move_group*** = the node that allow us to send tractories and positions  to the joints of the robot by using very simple
-   interfaces. (We use *moveit_commander* in python)
-	![enter image description here](https://raw.githubusercontent.com/JAKD9/Ur5_Moveit_Gazebo/master/Grasp/schema%20for%20move_group.JPG?token=ABLVZNCEND7IHEIFE36EO7K52CKVA)
+   interfaces. (We use *moveit_commander* in python) ![enter image description here](https://raw.githubusercontent.com/JAKD9/Ur5_Moveit_Gazebo/master/Grasp/schema%20for%20move_group.JPG?token=ABLVZNA76Q6PABAKIEP2JNK52CLPK)
+
 
  2. After executing the command below:
    
