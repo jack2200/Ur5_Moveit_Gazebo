@@ -37,7 +37,7 @@ Whenever we need to do a grasp, we need to implement the following steps
 
 After completing all these steps, robot is considered as it has grasped the object.
 
-In python script `grasp_demo.py` (python2) , steps are implemented assuming the robot should grasp the fixed object.(i.e we are considering we know where the ball is)
+In python script `grasp_demo.py` (python2) , steps are implemented assuming the robot should grasp the fixed object.(i.e we are considering we know where the object is)
 
 Note: Variable names for robot and gripper move_groups or other things are indicated in the code.
 
