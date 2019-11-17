@@ -96,6 +96,9 @@ class MoveGroupPythonIntefaceTutorial(object):
     ## to one group of joints.
     group_name = "manipulator"
     group = moveit_commander.MoveGroupCommander(group_name)
+    hand_group = moveit_commander.MoveGroupCommander("gripper") #name may differ
+
+
 
     ## We create a `DisplayTrajectory`_ publisher which is used later to publish
     ## trajectories for RViz to visualize:
@@ -133,6 +136,7 @@ class MoveGroupPythonIntefaceTutorial(object):
     self.robot = robot
     self.scene = scene
     self.group = group
+    self.hand_group = hand_group
     self.display_trajectory_publisher = display_trajectory_publisher
     self.planning_frame = planning_frame
     self.eef_link = eef_link
@@ -194,6 +198,15 @@ class MoveGroupPythonIntefaceTutorial(object):
     self.group.stop()
     self.group.clear_pose_targets()
     return 
+  
+  def change_gripper_state(self, value):
+    joint_values = self.hand_group.get_current_joint_values()
+    
+    joint_values = [value, value, -value, -value, -value, value]
+    self.hand_group.go(joint_values, wait=True)
+    self.hand_group.stop()
+    print joint_values
+    return
 
   def plan_cartesian_path(self, scale=1):
     ## BEGIN_SUB_TUTORIAL plan_cartesian_path
@@ -382,6 +395,7 @@ def main():
       print "6: Attach box"
       print "7: Detach box"
       print "8: Shift pose"
+      print "9: Change gripper state"
       case = raw_input()
       if(case == "0"):
         print "============ Give states to execute a movement using a joint state goal ..."
@@ -435,6 +449,10 @@ def main():
         axis = int(axis)
         value = float(value)
         tutorial.go_to_shifted_pose(axis, value)
+      elif(case == "9"):
+        value = float(raw_input())
+        tutorial.change_gripper_state(value)
+
       else:
           print "Invalid case!!"
     except rospy.ROSInterruptException:
