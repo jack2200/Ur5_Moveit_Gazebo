@@ -39,7 +39,7 @@ After completing all these steps, robot is considered as it has grasped the obje
 
 In python script `grasp_demo.py` (python2) , steps are implemented assuming the robot should grasp the fixed object.(i.e we are considering we know where the object is)
 
-Note: Variable names for robot and gripper move_groups or other things are indicated in the code.
+Note: Variable names for robot and gripper move_groups or other things which should be renamed or changed are indicated in the code.
 
 
 
