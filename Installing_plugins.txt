@@ -8,9 +8,6 @@ sudo apt-get install git (if git is not installed.)
 sudo apt-get install -y libgazebo7-dev
 cd ~/catkin_ws/src
 git clone https://github.com/ros-simulation/gazebo_ros_pkgs.git -b kinetic-devel
-rosdep update
-rosdep check --from-paths . --ignore-src --rosdistro kinetic
-rosdep install --from-paths . --ignore-src --rosdistro kinetic -y
 
 After this step put gazebo_ros_moveit_planning_scene.h file to: 
 ~/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins/include/gazebo_plugins
@@ -21,6 +18,9 @@ And put gazebo_ros_moveit_planning_scene.cpp to:
 Change your CMakelists.txt and package.xml with the updated ones.
 
 Then:
+rosdep update
+rosdep check --from-paths . --ignore-src --rosdistro kinetic
+rosdep install --from-paths . --ignore-src --rosdistro kinetic -y
 cd ~/catkin_ws/
 catkin_make
 
