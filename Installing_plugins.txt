@@ -18,6 +18,8 @@ After this step put gazebo_ros_moveit_planning_scene.h file to:
 And put gazebo_ros_moveit_planning_scene.cpp to:
 ~/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins/src
 
+Change your CMakelists.txt and package.xml with the updated ones.
+
 Then:
 cd ~/catkin_ws/
 catkin_make
