@@ -47,12 +47,12 @@
       <static>true</static>
       <include>
         <uri>model://cafe_table</uri>
-        <pose>0.8 0.5 0 0 0 0</pose>
+        <pose>0.35 0.5 0 0 0 0</pose>
       </include>
     </model>
 
     <!-- Cubes -->
-    <model name="cube1">
+   <!-- <model name="cube1">
       <pose>0.5 0.3 0.775 0 0 0</pose>
       <link name="link">
         <pose>0 0 0.025 0 0 0</pose>
@@ -200,10 +200,15 @@
             </contact>
             <friction>
               <torsional>
-                <coefficient>1.0</coefficient>
+                <coefficient>3.0</coefficient>
                 <use_patch_radius>0</use_patch_radius>
                 <surface_radius>0.05</surface_radius>
               </torsional>
+							<ode>
+								<mu>100.0</mu>
+								<mu2>100.0</mu2>
+								<fdir1>0.000000 0.000000 1.000000</fdir1>
+							</ode>
             </friction>
           </surface>
         </collision>
@@ -221,16 +226,9 @@
           </material>
         </visual>
       </link>
-    </model>
+    </model> -->
 
-      <gazebo>
-      <plugin filename="libgazebo_ros_moveit_planning_scene.so" name="gazebo_ros_moveit_planning_scene">
-        <topicName>/planning_scene</topicName>
-        <sceneName>table</sceneName>
-        <robotName>ur5</robotName>
-        <updatePeriod>0.5</updatePeriod>
-      </plugin>
-    </gazebo>
+
   </world>
 
 </sdf>
