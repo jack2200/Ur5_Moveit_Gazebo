@@ -1,0 +1,39 @@
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws
+catkin_make
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+sudo apt-get install git (if git is not installed.)
+sudo apt-get install -y libgazebo7-dev
+cd ~/catkin_ws/src
+git clone https://github.com/ros-simulation/gazebo_ros_pkgs.git -b kinetic-devel
+
+After this step put gazebo_ros_moveit_planning_scene.h file to: 
+~/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins/include/gazebo_plugins
+
+And put gazebo_ros_moveit_planning_scene.cpp to:
+~/catkin_ws/src/gazebo_ros_pkgs/gazebo_plugins/src
+
+Change your CMakelists.txt and package.xml with the updated ones.
+
+Then:
+rosdep update
+rosdep check --from-paths . --ignore-src --rosdistro kinetic
+rosdep install --from-paths . --ignore-src --rosdistro kinetic -y
+cd ~/catkin_ws/
+catkin_make
+
+
+This should create gazebo_ros_moveit_planning_scene.so file which is used as the plugin.
+
+EXTRA: 
+To make robot's position in gazbo and rviz same: Change the part starts with <joint name="world_joint" type="fixed"> in ~/<your ws>/src/universal_robot/ur_description/urdf/ur5_gripper.xacro  file as:
+<joint name="world_joint" type="fixed">
+    <parent link="world" />
+    <child link = "base_link" />
+    <origin xyz="0.0 0.0 0.96" rpy="0.0 0.0 0.0" />
+</joint>
+
+And change the part starts with <node name="spawn_gazebo_model" in ~/<your ws>/src/universal_robot/ur_gazebo/launch/ur5.launch as:
+<node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot" respawn="false" output="screen" />

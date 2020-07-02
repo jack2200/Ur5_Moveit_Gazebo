@@ -96,6 +96,9 @@ class MoveGroupPythonIntefaceTutorial(object):
     ## to one group of joints.
     group_name = "manipulator"
     group = moveit_commander.MoveGroupCommander(group_name)
+    hand_group = moveit_commander.MoveGroupCommander("gripper") #name may differ
+
+
 
     ## We create a `DisplayTrajectory`_ publisher which is used later to publish
     ## trajectories for RViz to visualize:
@@ -133,6 +136,7 @@ class MoveGroupPythonIntefaceTutorial(object):
     self.robot = robot
     self.scene = scene
     self.group = group
+    self.hand_group = hand_group
     self.display_trajectory_publisher = display_trajectory_publisher
     self.planning_frame = planning_frame
     self.eef_link = eef_link
@@ -188,6 +192,21 @@ class MoveGroupPythonIntefaceTutorial(object):
     current_pose = self.group.get_current_pose().pose
     return all_close(pose_goal, current_pose, 0.01)
 
+  def go_to_shifted_pose(self, axis, value):
+    self.group.shift_pose_target(axis, value)
+    plan = self.group.go(wait=True)
+    self.group.stop()
+    self.group.clear_pose_targets()
+    return 
+  
+  def change_gripper_state(self, value):
+    joint_values = self.hand_group.get_current_joint_values()
+    
+    joint_values = [value, value, -value, -value, -value, value]
+    self.hand_group.go(joint_values, wait=True)
+    self.hand_group.stop()
+    print joint_values
+    return
 
   def plan_cartesian_path(self, scale=1):
     ## BEGIN_SUB_TUTORIAL plan_cartesian_path
@@ -375,6 +394,8 @@ def main():
       print "5: Add box"
       print "6: Attach box"
       print "7: Detach box"
+      print "8: Shift pose"
+      print "9: Change gripper state"
       case = raw_input()
       if(case == "0"):
         print "============ Give states to execute a movement using a joint state goal ..."
@@ -422,6 +443,16 @@ def main():
         print "============ Press `Enter` to remove the box from the planning scene ..."
         raw_input()
         tutorial.remove_box()
+      elif(case == "8"):
+        inp = raw_input()
+        axis, value = inp.split(" ")
+        axis = int(axis)
+        value = float(value)
+        tutorial.go_to_shifted_pose(axis, value)
+      elif(case == "9"):
+        value = float(raw_input())
+        tutorial.change_gripper_state(value)
+
       else:
           print "Invalid case!!"
     except rospy.ROSInterruptException:
